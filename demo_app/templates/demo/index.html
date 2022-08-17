@@ -1,0 +1,43 @@
+{% extends 'layouts.html' %}
+{%block title%}
+<title>Products</title>
+{% endblock %}
+{%block main_content%}
+
+<div class="container-fluid mt-4">
+
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Product Price</th>
+                <th>Available Stock</th>
+                <th>Product Description</th>
+                <th>Product Image</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in products %}
+                <tr>
+                    <td>{{post.product_name}}</td>
+                    <td>{{post.product_price}}</td>
+                    <td>{{post.stock}}</td>
+                    <td>{{post.product_description}}</td>
+                    <td><img src="/{{post.product_image}}" alt="" width="150"></td>
+                    <td><a href="/admin/update_product/{{post.id}}" class="btn btn-primary text-white">
+                        <i class='bx bxs-edit'></i>
+                    </a>
+                        &nbsp;
+                    <a href="/admin/delete_product/{{post.id}}" class="btn btn-danger text-white" onclick="return confirm ('Are You Sure you want to Delete this product')">
+                        <i class='bx bxs-trash-alt'></i>
+                    </a>   
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</div>
+  
+{% endblock %}

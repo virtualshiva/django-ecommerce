@@ -1,0 +1,52 @@
+{% extends 'layouts.html' %}
+
+{% block title %}
+<title>Category</title>
+{% endblock %}
+
+{% block main_content %}
+
+            
+            {% for msg in messages %}
+            {% if msg.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            <div class="alert alert-success">
+                {{msg}}
+            </div>
+            {% endif %}
+            {% endfor %}
+
+<div class="container-fluid mt-4">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6">
+            
+    
+
+    <table class="table table-borderd  table-hover"  > 
+        <thead>
+            <tr>
+                <th>Category Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in category %}
+            <tr>
+                <td>{{post.category_name}}</td>
+               
+                <td>
+                    <a href="/admin/update_category/{{post.id}}" class="btn btn-primary text-white">
+                        <i class='bx bxs-edit' ></i>
+                    </a>
+                        &nbsp;
+                    <a href="/admin/delete_category/{{post.id}}" class="btn btn-danger text-white" onclick="return confirm('Are You Sure Want To Delete PRoduct?')">
+                        <i class='bx bxs-trash-alt' ></i>
+                    </a>    
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+</div>
+</div>
+    {% endblock %}

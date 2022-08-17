@@ -1,0 +1,40 @@
+{% extends 'client/layouts.html' %}
+{% load static %}
+
+{% block title %}
+<title>Product Details</title>
+{%endblock%}
+
+{% block main_content %}
+
+
+<!-- product details conatiner starts -->
+
+<div class="container mt-3">
+    <div class="shadow-lg mb-3">
+        <div class="row d-flex justify-content-evenly p-4">
+          <div class="col-md-4 p-2 shadow" data-aos="fade-up-right">
+            <img src="/{{product.product_image}}" class="img-fluid rounded-start" alt="{{product.product_name}}">
+          </div>
+          <div class="col-md-7 shadow p-5" data-aos="fade-up-left">
+            <div class="card-body">
+
+              <h2 class="card-title">{{product.product_name}}</h2>
+              <h3 class="card-title">{{product.product_price}}</h3>
+              <h3 class="text-muted">Available Quantity: {{product.stock}}</h3>
+              <h3>Category : {{product.category}} </h3>
+
+              <p class="card-text">{{product.product_description}}</p>
+
+              <a href="/add_to_cart/{{product.id}}"><button class="btn btn-warning px-4">Add to Cart</button></a>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+
+<!-- product details container end -->
+
+{% endblock %}

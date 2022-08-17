@@ -1,0 +1,69 @@
+{% extends 'client/layouts.html' %}
+{% load static %}
+
+{% block title %}
+<title>Online Shop || Cart Items</title>
+{%endblock%}
+
+{% block main_content %}
+
+<!-- Cart conatiner starts -->
+<div class="container mt-4">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-10">
+            {% for msg in messages %}
+
+            {% if msg.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            <div class="alert alert-success">
+                {{msg}}
+            </div>
+            {% endif %}
+
+            {% if msg.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+            <div class="alert alert-danger">
+                {{msg}}
+            </div>
+            {% endif %}
+
+            {% endfor %}
+
+            {%if items|length < 1 %}
+            
+            <h1 class="text-center text-danger shadow-lg p-5">
+                No Items in the cart
+            </h1>
+            {%else%}
+            <h1 class="text-muted text-center">My Cart Items</h1>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Product Price</th>
+                        <th>Product Image</th>
+                        <th>Date Added</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in items %}
+                    <tr>
+                        <td>{{i.product.product_name}}</td>
+                        <td>{{i.product.product_price}}</td>
+                        <td><img src="/{{i.product.product_image}}" alt="{{i.product.product_name}}" width="150"></td>
+                        <td>{{i.created_date}}</td>
+                        <td><a href="/remove_cart/{{i.id}}" class="btn btn-danger text-muted" onclick="return confirm('Are you sure want to delete this items from cart?')">Delete</a>
+                        <a href="/orderform/{{i.product.id}}/{{i.id}}" class="btn btn-info btn-sm">Order Now</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {%endif%}
+        </div>
+
+    </div>
+</div>
+
+<!-- Cart container end -->
+
+{% endblock %}
